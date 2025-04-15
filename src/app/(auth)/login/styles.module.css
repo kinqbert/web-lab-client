@@ -1,0 +1,23 @@
+.container {
+  height: 100vh;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  padding: 20px;
+  border-radius: 6px;
+
+  background-color: var(--grey);
+  border: 1px solid var(--grey-border);
+}

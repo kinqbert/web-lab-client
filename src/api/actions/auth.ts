@@ -1,0 +1,85 @@
+import { redirect } from "next/navigation";
+import { loginUser, registerUser } from "../requests/user";
+import { AxiosError } from "axios";
+import { useAuthStore } from "@/store/authStore";
+
+export interface LoginData {
+  error: string | null;
+  fields: {
+    email: string;
+    password: string;
+  };
+}
+
+export const loginSubmit = async (
+  prevState: LoginData,
+  formData: FormData
+): Promise<LoginData> => {
+  const email = formData.get("email")?.toString() || "";
+  const password = formData.get("password")?.toString() || "";
+
+  try {
+    const response = await loginUser({ email, password });
+    useAuthStore.getState().setAccessToken(response.data.accessToken);
+  } catch (err) {
+    const data = (err as AxiosError).response?.data;
+    return {
+      error: (data as { error: string }).error || "Login failed",
+      fields: {
+        email,
+        password,
+      },
+    };
+  }
+
+  redirect("/dashboard");
+};
+
+export interface RegisterData {
+  error: string | null;
+  fields: {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+  };
+}
+
+export const registerSubmit = async (
+  prevState: { error: string | null },
+  formData: FormData
+): Promise<RegisterData> => {
+  const name = formData.get("name")?.toString() || "";
+  const email = formData.get("email")?.toString() || "";
+  const password = formData.get("password")?.toString() || "";
+  const passwordConfirmation =
+    formData.get("password_confirmation")?.toString() || "";
+
+  if (password !== passwordConfirmation) {
+    return {
+      error: "Passwords don't match",
+      fields: {
+        name,
+        email,
+        password,
+        passwordConfirmation,
+      },
+    };
+  }
+
+  try {
+    const response = await registerUser({ name, email, password });
+    useAuthStore.getState().setAccessToken(response.data.accessToken);
+  } catch (err) {
+    const axiosErr = err as AxiosError<{ error?: string }>;
+    const message =
+      axiosErr.response?.data?.error || axiosErr.message || "Register failed";
+
+    return {
+      error: message,
+      fields: { name, email, password, passwordConfirmation },
+    };
+  }
+
+  redirect("/dashboard");
+};
