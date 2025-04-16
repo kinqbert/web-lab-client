@@ -1,5 +1,9 @@
-"use client";
+import { Summary } from "@/components/dashboard/Summary/Summary";
 
 export default function DashboardBage() {
-  return <div></div>;
+  return (
+    <div>
+      <Summary />
+    </div>
+  );
 }

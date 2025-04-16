@@ -1,9 +1,7 @@
-import { SummaryData } from "@/types/transactions";
+import { getDashboardSummary } from "@/api/server/getDashboardSummary";
 
-interface Props {
-  summaryData: SummaryData;
-}
+export const Summary = async () => {
+  const data = await getDashboardSummary();
 
-export const Summary = async ({ summaryData }: Props) => {
-  return <div>{summaryData.balance}</div>;
+  return <div>Balance: {data.balance}</div>;
 };
