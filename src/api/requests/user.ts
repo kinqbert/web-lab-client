@@ -6,7 +6,12 @@ export const loginUser = async ({
 }: {
   email: string;
   password: string;
-}) => await api.post("/users/login", { email, password });
+}) =>
+  await api.post(
+    "/users/login",
+    { email, password },
+    { withCredentials: true }
+  );
 
 export const registerUser = async ({
   name,
@@ -16,4 +21,9 @@ export const registerUser = async ({
   name: string;
   email: string;
   password: string;
-}) => await api.post("/users/register", { name, email, password });
+}) =>
+  await api.post(
+    "/users/register",
+    { name, email, password },
+    { withCredentials: true }
+  );

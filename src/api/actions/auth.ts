@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { loginUser, registerUser } from "../requests/user";
 import { AxiosError } from "axios";
-import { useAuthStore } from "@/store/authStore";
 
 export interface LoginData {
   error: string | null;
@@ -19,18 +18,12 @@ export const loginSubmit = async (
   const password = formData.get("password")?.toString() || "";
 
   try {
-    const response = await loginUser({ email, password });
-    useAuthStore
-      .getState()
-      .setTokens(response.data.accessToken, response.data.refreshToken);
+    await loginUser({ email, password });
   } catch (err) {
     const data = (err as AxiosError).response?.data;
     return {
-      error: (data as { error: string }).error || "Login failed",
-      fields: {
-        email,
-        password,
-      },
+      error: (data as { error: string })?.error || "Login failed",
+      fields: { email, password },
     };
   }
 
@@ -70,10 +63,7 @@ export const registerSubmit = async (
   }
 
   try {
-    const response = await registerUser({ name, email, password });
-    useAuthStore
-      .getState()
-      .setTokens(response.data.accessToken, response.data.refreshToken);
+    await registerUser({ name, email, password });
   } catch (err) {
     const axiosErr = err as AxiosError<{ error?: string }>;
     const message =
