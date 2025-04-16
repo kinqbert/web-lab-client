@@ -1,0 +1,54 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;
+  background-color: var(--grey);
+
+  overflow: hidden;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.links {
+  display: flex;
+  gap: 12px;
+}
+
+.link {
+  opacity: 0.4;
+  position: relative;
+
+  transition-duration: 0.3s;
+
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &::after {
+    content: "";
+    height: 1px;
+    width: 0%;
+    background-color: white;
+    position: absolute;
+
+    bottom: -4px;
+    left: 0;
+
+    transition-duration: 0.3s;
+  }
+}
+
+.active {
+  opacity: 1;
+}
+
+.main {
+  padding: 12px;
+}
