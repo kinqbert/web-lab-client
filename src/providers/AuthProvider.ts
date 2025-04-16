@@ -1,27 +1,37 @@
 "use client";
 import { useEffect } from "react";
-import { useAuthStore } from "@/store/authStore";
+import { redirect, useRouter } from "next/navigation";
 import { api } from "@/api/api";
-import { redirect } from "next/navigation";
+import { useAuthStore } from "@/store/authStore";
 
 export default function AuthProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const setAccessToken = useAuthStore((s) => s.setAccessToken);
+  const { refreshToken, setTokens, logout } = useAuthStore();
+  const router = useRouter();
 
   useEffect(() => {
+    if (!refreshToken) return;
+
+    let cancelled = false;
+
     (async () => {
       try {
-        const { data } = await api.post("/auth/refresh");
-        setAccessToken(data.accessToken);
+        const { data } = await api.post("/users/refresh", { refreshToken });
+        if (!cancelled) setTokens(data.accessToken, refreshToken);
       } catch {
-        setAccessToken(null);
+        if (cancelled) return;
+        logout();
         redirect("/login");
       }
     })();
-  }, [setAccessToken]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshToken, setTokens, logout, router]);
 
   return children;
 }

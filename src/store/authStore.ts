@@ -5,24 +5,34 @@ import { persist } from "zustand/middleware";
 
 interface AuthState {
   accessToken: string | null;
-  getIsAuth: () => boolean;
-  setAccessToken: (t: string | null) => void;
+  refreshToken: string | null;
+  isAuth: boolean;
+  setTokens: (access: string | null, refresh: string | null) => void;
+  logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       accessToken: null,
-      getIsAuth: () => !!get().accessToken,
-      setAccessToken: (t) =>
+      refreshToken: null,
+      isAuth: false,
+
+      setTokens: (access, refresh) =>
         set({
-          accessToken: t,
+          accessToken: access,
+          refreshToken: refresh,
+          isAuth: !!access,
         }),
+
+      logout: () =>
+        set({ accessToken: null, refreshToken: null, isAuth: false }),
     }),
     {
       name: "auth-storage",
       partialize: (state) => ({
         accessToken: state.accessToken,
+        refreshToken: state.refreshToken,
       }),
     }
   )

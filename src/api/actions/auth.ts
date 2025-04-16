@@ -20,7 +20,9 @@ export const loginSubmit = async (
 
   try {
     const response = await loginUser({ email, password });
-    useAuthStore.getState().setAccessToken(response.data.accessToken);
+    useAuthStore
+      .getState()
+      .setTokens(response.data.accessToken, response.data.refreshToken);
   } catch (err) {
     const data = (err as AxiosError).response?.data;
     return {
@@ -69,7 +71,9 @@ export const registerSubmit = async (
 
   try {
     const response = await registerUser({ name, email, password });
-    useAuthStore.getState().setAccessToken(response.data.accessToken);
+    useAuthStore
+      .getState()
+      .setTokens(response.data.accessToken, response.data.refreshToken);
   } catch (err) {
     const axiosErr = err as AxiosError<{ error?: string }>;
     const message =

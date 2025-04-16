@@ -13,9 +13,13 @@ import { useAuthStore } from "@/store/authStore";
 import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
-  if (useAuthStore.getState().getIsAuth()) {
-    redirect("/dashboard");
-  }
+  const isAuth = useAuthStore((s) => s.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      redirect("/dashboard");
+    }
+  }, [isAuth]);
 
   const [state, formAction] = useActionState(registerSubmit, {
     error: null,
