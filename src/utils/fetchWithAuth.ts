@@ -47,7 +47,10 @@ export async function fetchWithAuth(
   });
 
   if (!res.ok) {
-    console.error(`Failed to fetch ${endpoint}`, res.status);
+    if (res.status === 401 || res.status === 498) {
+      redirect("/login");
+    }
+
     throw new Error(`Failed to fetch ${endpoint}`);
   }
 

@@ -10,8 +10,8 @@
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
 }
 
 .links {
@@ -22,6 +22,8 @@
 .link {
   opacity: 0.4;
   position: relative;
+
+  font-size: 12px;
 
   transition-duration: 0.3s;
 
