@@ -47,3 +47,10 @@ export const registerUser = async ({
 
   return await res.json();
 };
+
+export const logoutUser = async () => {
+  await fetch("http://localhost:5050/users/logout", {
+    method: "POST",
+    credentials: "include",
+  }).catch(() => null);
+};

@@ -11,7 +11,11 @@ export const Summary = async () => {
     <div className={styles.summary}>
       <div className={styles.summaryItem}>
         <span className={styles.summaryItemTitle}>Summary</span>
-        <span className={styles.summaryItemValue}>
+        <span
+          className={`${styles.summaryItemValue} ${
+            isPositive ? "text-green-600" : "text-red-600"
+          }`}
+        >
           {isPositive ? `+${data.balance}` : data.balance}
         </span>
       </div>

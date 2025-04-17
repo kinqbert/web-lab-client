@@ -1,0 +1,7 @@
+.transactions {
+  background-color: var(--grey);
+  border: 1px solid var(--grey-border);
+
+  border-radius: 14px;
+  padding: 20px;
+}

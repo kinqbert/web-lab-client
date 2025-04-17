@@ -1,12 +1,13 @@
 "use client";
 
-import logo from "@/assets/general/logo.svg";
+import logo from "@/assets/logo.svg";
 
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import styles from "./layout.module.css";
+import { LogoutButton } from "@/components/auth/LogoutButton/LogoutButton";
 
 export default function MailLayout({
   children,
@@ -40,6 +41,7 @@ export default function MailLayout({
           >
             Transactions
           </Link>
+          <LogoutButton />
         </div>
       </nav>
       <main className={styles.main}>{children}</main>
