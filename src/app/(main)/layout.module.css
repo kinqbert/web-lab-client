@@ -26,13 +26,13 @@
 .links {
   display: flex;
   gap: 12px;
+
+  font-size: 12px;
 }
 
 .link {
   opacity: 0.4;
   position: relative;
-
-  font-size: 12px;
 
   transition-duration: 0.3s;
 
