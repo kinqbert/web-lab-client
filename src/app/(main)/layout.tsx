@@ -18,8 +18,9 @@ export default function MailLayout({
   return (
     <div className={styles.content}>
       <nav className={styles.navbar}>
-        <Link href="/dashboard">
+        <Link className={styles.logoWrapper} href="/dashboard">
           <Image className={styles.logo} src={logo} alt="Logo" />
+          <span>iMoney</span>
         </Link>
         <div className={styles.links}>
           <Link

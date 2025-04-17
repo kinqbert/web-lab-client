@@ -9,6 +9,14 @@
   overflow: hidden;
 }
 
+.logoWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  font-weight: 600;
+}
+
 .logo {
   width: 28px;
   height: 28px;
