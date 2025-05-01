@@ -29,7 +29,7 @@ const buildDataset = (
   raw.map(({ category, total }) => ({
     category,
     amount: total,
-    fill: `hsl(${stringToHue(category)} 50% 55%)`,
+    fill: `hsl(${stringToHue(category)} 50% 50%)`,
   }));
 
 type ExpenseSlice = CategoryData;
@@ -59,7 +59,7 @@ export function ExpenseChart({
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square min-h-[100px] max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground"
+          className="w-full aspect-square min-h-[100px] max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground"
         >
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />

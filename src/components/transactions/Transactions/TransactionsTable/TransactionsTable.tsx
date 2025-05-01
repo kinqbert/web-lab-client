@@ -166,7 +166,7 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
         </TableHeader>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row._id}>
+            <TableRow key={row._id} className="h-[36px]">
               <td>{fmtDate(row.transactionDate)}</td>
               <td>{row.category}</td>
               <td>

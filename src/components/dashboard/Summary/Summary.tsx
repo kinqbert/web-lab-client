@@ -5,18 +5,30 @@ import styles from "./styles.module.css";
 export const Summary = async () => {
   const data = await getDashboardSummary();
 
-  const isPositive = data.balance > 0;
+  const getSummaryTextColor = () => {
+    if (data.balance > 0) {
+      return "text-green-600";
+    } else if (data.balance < 0) {
+      return "text-red-600";
+    }
+
+    return "";
+  };
+
+  const getSummaryText = () => {
+    if (data.balance > 0) {
+      return `+${data.balance}`;
+    }
+
+    return data.balance;
+  };
 
   return (
     <div className={styles.summary}>
       <div className={styles.summaryItem}>
         <span className={styles.summaryItemTitle}>Summary</span>
-        <span
-          className={`${styles.summaryItemValue} ${
-            isPositive ? "text-green-600" : "text-red-600"
-          }`}
-        >
-          {isPositive ? `+${data.balance}` : data.balance}
+        <span className={`${styles.summaryItemValue} ${getSummaryTextColor()}`}>
+          {getSummaryText()}
         </span>
       </div>
       <div className={styles.separator}></div>
