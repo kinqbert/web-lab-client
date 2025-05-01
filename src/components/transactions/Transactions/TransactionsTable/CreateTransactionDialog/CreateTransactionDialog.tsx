@@ -44,7 +44,9 @@ export function CreateTransactionDialog({ goals }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Add transaction</Button>
+        <Button className="w-full mt-2 sm:w-[160px] sm:mt-0">
+          Add transaction
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-lg">

@@ -86,13 +86,16 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between">
-        <div className="flex gap-4">
+      <div
+        className="flex justify-between flex-wrap"
+        style={{ flexBasis: "100%" }}
+      >
+        <div className="flex gap-4 flex-wrap flex-1">
           <Select
             value={type}
             onValueChange={(v) => setType(v as TRANSACTION_TYPE)}
           >
-            <SelectTrigger className="w-32">
+            <SelectTrigger className="w-full sm:w-[160px]">
               <SelectValue>{type === "all" ? "All types" : type}</SelectValue>
             </SelectTrigger>
             <SelectContent>
@@ -103,7 +106,7 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
           </Select>
 
           <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full sm:w-[160px]">
               <SelectValue>
                 {category === "all" ? "All categories" : category}
               </SelectValue>
@@ -119,7 +122,7 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
           </Select>
 
           <Select value={sort} onValueChange={(v) => setSort(v as SortKey)}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="w-full sm:w-[160px]">
               <SelectValue>Sort</SelectValue>
             </SelectTrigger>
             <SelectContent>
@@ -132,14 +135,14 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
 
           <Input
             placeholder="Search…"
-            className="max-w-[200px]"
+            className="w-full sm:w-[160px]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
 
           <Button
-            className="h-full"
-            variant="ghost"
+            className="w-full sm:w-[160px]"
+            variant="secondary"
             onClick={() => {
               setType(TRANSACTION_TYPE.ALL);
               setCategory("all");
@@ -154,7 +157,7 @@ export const TransactionsTable = ({ initialTransactions, goals }: Props) => {
         <CreateTransactionDialog goals={goals} />
       </div>
 
-      <Table>
+      <Table className="min-w-[500px] overflow-y-scroll">
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>

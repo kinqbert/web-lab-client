@@ -30,7 +30,9 @@ export function CreateGoalDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Create new goal</Button>
+        <Button className="w-full mt-2 sm:w-[160px] sm:mt-0">
+          Create new goal
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
